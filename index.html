@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sorting Algorithms</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sixtyfour&family=Press+Start+2P&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">SORTING ALGORITHMS</div>
+      <nav class="nav-tabs">
+        <a href="#" class="active" data-sort="insertion">Insertion Sort</a>
+        <a href="#" data-sort="selection">Selection Sort</a>
+        <a href="#" data-sort="quick">Quick Sort</a>
+        <a href="#" data-sort="merge">Merge Sort</a>
+        <a href="#" data-sort="bubble">Bubble Sort</a>
+      </nav>
+    </header>
+
+    <!-- Main title (changes based on selection) -->
+    <h1 class="main-title" id="algoTitle">Insertion Sort</h1>
+
+    <!-- Visualization area -->
+    <div class="visual-wrapper">
+      <div class="visual-box"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <!-- Array size slider -->
+      <div class="array-size-control">
+        <input id="arraySize" type="range" min="10" max="200" value="50" />
+        <span class="speed-label">Size</span>
+      </div>
+
+      <!-- Speed slider -->
+      <div class="speed-control">
+        <input id="speed" type="range" min="1" max="100" value="1" />
+        <span class="speed-label" id="speed-lbl">1.0x</span>
+      </div>
+
+      <!-- Play / Stop buttons -->
+      <div class="square-btn green" id="start_btn">▶</div>
+      <div class="square-btn red" id="stop_btn">■</div>
+      <div class="square-btn yellow" id="shuffle_btn">🔀</div>
+    </div>
+
+    <!-- Complexity section -->
+    <div class="complexity">
+      <div class="time-complexity">
+        Time Complexity:
+        <span id="timeComp">Best: O(n), Avg: O(n²), Worst: O(n²)</span>
+      </div>
+      <div class="space-complexity">
+        Space Complexity:
+        <span id="spaceComp">O(1)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="Algorithms/insertion.js"></script>
+  <script src="Algorithms/selection.js"></script>
+  <script src="Algorithms/quick.js"></script>
+  <script src="Algorithms/merge.js"></script>
+  <script src="Algorithms/bubble.js"></script>
+  <script src="algorithmdata.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>
