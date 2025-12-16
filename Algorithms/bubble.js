@@ -1,35 +1,37 @@
 async function bubbleSort(arr) {
     isSorting = true;
+    isStopped = false;
+    resetStats();
+    startTimer();
 
-    const n = arr.length;
-    for (let i = 0; i < n - 1; i++) {
-        if (isStopped) {
-            isSorting = false;
-            return;
-        }
+    for (let i = 0; i < arr.length - 1; i++) {
+        iterations++;
 
-        for (let j = 0; j < n - i - 1; j++) {
-            if (isStopped) {
-                isSorting = false;
-                return;
-            }
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            comparisons++;
 
             if (arr[j] > arr[j + 1]) {
-                const temp = arr[j];
+                swaps++;
+                let temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
+            }
 
-                renderArray(arr);
-                await sleep();
+            updateStats();
+            renderArray(arr);
+            await sleep();
+
+            if (isStopped) {
+                isSorting = false;
+                stopTimer();
+                return;
             }
         }
     }
 
-    renderArray(arr);
+    stopTimer();
     isSorting = false;
-    if (!isStopped) {
-        isSorted = true;
-    }
-    return arr;
+    isSorted = true;
 }
+
 

@@ -1,29 +1,85 @@
-const algoData = {
-    insertion:{
-        title: "Insertion Sort" ,
-        time: "Best: O(n), Avg: O(n²), Worst: O(n²)",
-        space: "O(1)",
+const algorithmData = {
+  insertion: {
+    title: "Insertion Sort",
+    time: {
+      best: "O(n)",
+      average: "O(n²)",
+      worst: "O(n²)",
     },
-    selection:{
-        title: "Selection Sort" ,
-        time: "Best: O(n²), Avg: O(n²), Worst: O(n²)",
-        space: "O(1)",
+    space: {
+      worst: "O(1)",
+      stable: "Yes",
+      inPlace: "Yes",
     },
-    quick:{
-        title: "Quick Sort" ,
-        time: "Best: O(n log n), Avg: O(n log n), Worst: O(n²)",
-        space: "O(log n)",
-    },
-    merge:{
-        title: "Merge Sort" ,
-        time: "Best: O(n log n), Avg: O(n log n), Worst: O(n log n)",
-        space: "O(n)",
-    },
-    bubble:{
-        title: "Bubble Sort" ,
-        time: "Best: O(n), Avg: O(n²), Worst: O(n²)",
-        space: "O(1)",
-    },
+  },
 
+  selection: {
+    title: "Selection Sort",
+    time: {
+      best: "O(n²)",
+      average: "O(n²)",
+      worst: "O(n²)",
+    },
+    space: {
+      worst: "O(1)",
+      stable: "No",
+      inPlace: "Yes",
+    },
+  },
 
+  bubble: {
+    title: "Bubble Sort",
+    time: {
+      best: "O(n)",
+      average: "O(n²)",
+      worst: "O(n²)",
+    },
+    space: {
+      worst: "O(1)",
+      stable: "Yes",
+      inPlace: "Yes",
+    },
+  },
+
+  quick: {
+    title: "Quick Sort",
+    time: {
+      best: "O(n log n)",
+      average: "O(n log n)",
+      worst: "O(n²)",
+    },
+    space: {
+      worst: "O(log n)",
+      stable: "No",
+      inPlace: "Yes",
+    },
+  },
+
+  merge: {
+    title: "Merge Sort",
+    time: {
+      best: "O(n log n)",
+      average: "O(n log n)",
+      worst: "O(n log n)",
+    },
+    space: {
+      worst: "O(n)",
+      stable: "Yes",
+      inPlace: "No",
+    },
+  },
+
+  heap: {
+    title: "Heap Sort",
+    time: {
+      best: "O(n log n)",
+      average: "O(n log n)",
+      worst: "O(n log n)",
+    },
+    space: {
+      worst: "O(1)",
+      stable: "No",
+      inPlace: "Yes",
+    },
+  },
 };

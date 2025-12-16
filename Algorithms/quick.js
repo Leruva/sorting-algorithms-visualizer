@@ -1,41 +1,25 @@
-async function quickSort(arr, low = 0, high = arr.length - 1) {
-    const isRootCall = (low === 0 && high === arr.length - 1);
+async function quickSort(arr) {
+    isSorting = true;
+    isStopped = false;
+    resetStats();
+    startTimer();
 
-    if (isRootCall) {
-        isSorting = true;
-    }
+    await quickSortHelper(arr, 0, arr.length - 1);
 
-    if (isStopped || low >= high) {
-        if (isRootCall) {
-            isSorting = false;
-        }
-        return;
-    }
+    stopTimer();
+    isSorting = false;
+    if (!isStopped) isSorted = true;
+}
 
-    const p = await partition(arr, low, high);
-    if (isStopped) {
-        if (isRootCall) isSorting = false;
-        return;
-    }
+async function quickSortHelper(arr, low, high) {
+    if (low >= high || isStopped) return;
 
-    await quickSort(arr, low, p - 1);
-    if (isStopped) {
-        if (isRootCall) isSorting = false;
-        return;
-    }
+    iterations++;
 
-    await quickSort(arr, p + 1, high);
-    if (isStopped) {
-        if (isRootCall) isSorting = false;
-        return;
-    }
+    const pivotIndex = await partition(arr, low, high);
 
-    if (isRootCall) {
-        isSorting = false;
-        if (!isStopped) {
-            isSorted = true;
-        }
-    }
+    await quickSortHelper(arr, low, pivotIndex - 1);
+    await quickSortHelper(arr, pivotIndex + 1, high);
 }
 
 async function partition(arr, low, high) {
@@ -43,23 +27,27 @@ async function partition(arr, low, high) {
     let i = low - 1;
 
     for (let j = low; j < high; j++) {
-        if (isStopped) return;
-        if (arr[j] <= pivot) {
+        comparisons++;
+
+        if (arr[j] < pivot) {
             i++;
-            const temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+            swaps++;
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+
+            updateStats();
             renderArray(arr);
             await sleep();
         }
+
+        if (isStopped) return high;
     }
 
-    const temp = arr[i + 1];
-    arr[i + 1] = arr[high];
-    arr[high] = temp;
+    swaps++;
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+
+    updateStats();
     renderArray(arr);
     await sleep();
 
     return i + 1;
 }
-

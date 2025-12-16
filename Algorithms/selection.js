@@ -1,43 +1,42 @@
 async function selectionSort(arr) {
     isSorting = true;
+    isStopped = false;
+    resetStats();
+    startTimer();
 
-    if (isStopped) {
-        isSorting = false;
-        return;
-    }
-
-    const n = arr.length;
-    for (let i = 0; i < n - 1; i++) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        iterations++;
         let minIndex = i;
 
-        for (let j = i + 1; j < n; j++) {
-            if (isStopped) {          
-                isSorting = false;
-                return;
-            }
+        for (let j = i + 1; j < arr.length; j++) {
+            comparisons++;
+
             if (arr[j] < arr[minIndex]) {
                 minIndex = j;
+            }
+
+            updateStats();
+            renderArray(arr);
+            await sleep();
+
+            if (isStopped) {
+                isSorting = false;
+                stopTimer();
+                return;
             }
         }
 
         if (minIndex !== i) {
-            const temp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = temp;
-        }
+            swaps++;
+            [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
 
-        if (isStopped) {
-            isSorting = false;
-            return;
+            updateStats();
+            renderArray(arr);
+            await sleep();
         }
-
-        renderArray(arr);
-        await sleep();                
     }
 
+    stopTimer();
     isSorting = false;
-    if (!isStopped) {
-        isSorted = true;
-    }
-    return arr;
+    isSorted = true;
 }

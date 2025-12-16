@@ -1,73 +1,72 @@
-async function mergeSort(arr, left = 0, right = arr.length - 1) {
-    const isRootCall = (left === 0 && right === arr.length - 1);
+async function mergeSort(arr) {
+    isSorting = true;
+    isStopped = false;
+    resetStats();
+    startTimer();
 
-    if (isRootCall) {
-        isSorting = true;
-    }
+    await mergeSortHelper(arr, 0, arr.length - 1);
 
-    if (isStopped || left >= right) {
-        if (isRootCall) {
-            isSorting = false;
-        }
-        return;
-    }
+    stopTimer();
+    isSorting = false;
+    if (!isStopped) isSorted = true;
+}
+
+async function mergeSortHelper(arr, left, right) {
+    if (left >= right || isStopped) return;
+
+    iterations++;
 
     const mid = Math.floor((left + right) / 2);
 
-    await mergeSort(arr, left, mid);
-    if (isStopped) {
-        if (isRootCall) isSorting = false;
-        return;
-    }
-
-    await mergeSort(arr, mid + 1, right);
-    if (isStopped) {
-        if (isRootCall) isSorting = false;
-        return;
-    }
+    await mergeSortHelper(arr, left, mid);
+    await mergeSortHelper(arr, mid + 1, right);
 
     await merge(arr, left, mid, right);
-    if (isStopped) {
-        if (isRootCall) isSorting = false;
-        return;
-    }
-
-    if (isRootCall) {
-        isSorting = false;
-        if (!isStopped) {
-            isSorted = true;
-        }
-    }
 }
 
 async function merge(arr, left, mid, right) {
     if (isStopped) return;
 
-    const temp = [];
-    let i = left;
-    let j = mid + 1;
+    const leftArr = arr.slice(left, mid + 1);
+    const rightArr = arr.slice(mid + 1, right + 1);
 
-    while (i <= mid && j <= right) {
-        if (isStopped) return;
-        if (arr[i] <= arr[j]) temp.push(arr[i++]);
-        else temp.push(arr[j++]);
-    }
+    let i = 0, j = 0, k = left;
 
-    while (i <= mid) {
-        if (isStopped) return;
-        temp.push(arr[i++]);
-    }
+    while (i < leftArr.length && j < rightArr.length) {
+        comparisons++;
 
-    while (j <= right) {
-        if (isStopped) return;
-        temp.push(arr[j++]);
-    }
+        if (leftArr[i] <= rightArr[j]) {
+            arr[k++] = leftArr[i++];
+        } else {
+            arr[k++] = rightArr[j++];
+        }
 
-    for (let k = left; k <= right; k++) {
-        if (isStopped) return;
-        arr[k] = temp[k - left];
+        swaps++;            
+        updateStats();
         renderArray(arr);
         await sleep();
+
+        if (isStopped) return;
+    }
+
+    while (i < leftArr.length) {
+        arr[k++] = leftArr[i++];
+        swaps++;
+        updateStats();
+        renderArray(arr);
+        await sleep();
+
+        if (isStopped) return;
+    }
+
+    while (j < rightArr.length) {
+        arr[k++] = rightArr[j++];
+        swaps++;
+        updateStats();
+        renderArray(arr);
+        await sleep();
+
+        if (isStopped) return;
     }
 }
 

@@ -1,81 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Sorting Algorithms</title>
-
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Sixtyfour&family=Press+Start+2P&display=swap"
-    rel="stylesheet"
-  />
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Algorithms</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
 </head>
 <body>
-  <div class="page">
-    <!-- Header -->
-    <header class="header">
-      <div class="logo">SORTING ALGORITHMS</div>
-      <nav class="nav-tabs">
-        <a href="#" class="active" data-sort="insertion">Insertion Sort</a>
-        <a href="#" data-sort="selection">Selection Sort</a>
-        <a href="#" data-sort="quick">Quick Sort</a>
-        <a href="#" data-sort="merge">Merge Sort</a>
-        <a href="#" data-sort="bubble">Bubble Sort</a>
-      </nav>
-    </header>
+    <div class="container">
+        <header>
+            <div class="nav">
+                <div class="nav-right">
+                    <h1 class="hcolor">SORTING ALGORITHM</h1>
+                    <p>Visualize and compare sorting algorithms in real time</p>
+                </div>
+                <div class="nav-tabs">
+                    <button class="action"><a href="#" class="active" data-sort="insertion">Insertion</a></button>
+                    <button><a href="#"  data-sort="selection">Selection</a></button>
+                    <button><a href="#"  data-sort="quick">Quick</a></button>
+                    <button><a href="#"  data-sort="merge">Merge</a></button>
+                    <button><a href="#" data-sort="bubble">Bubble</a></button>
+                    <button><a href="#"  data-sort="heap">Heap</a></button>
+                </div>
+            </div>
+            <section class="main-container">
+                <div class="main-left">
+                    <div class="top">
+                        <h2 id="sort-title" class="hcolor">INSERTION SORT</h2>
+                        
+                        <div class="array-size" id="array_size">Array size: 50</div>
+                    </div>
+                    <div class="visual-wrapper">
+                        <div class="visual-box" id="visual-box">
+                        </div>
+                    </div>
+                    <div class="control-btns">
+                        <button class="square-btn green" id="start-btn">
+                            <span class="material-symbols-outlined">play_arrow</span>
+                        </button>
+                        <button class="square-btn yellow" id="shuffle-btn">
+                            <span class="material-symbols-outlined">shuffle</span>
+                        </button>
+                        <button class="square-btn red" id="stop-btn">
+                            <span class="material-symbols-outlined">stop_circle</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="main-right">
+                    <div class="sorting-data">
+                        <div class="row">
+                            <p>Comparisons</p>
+                            <span class="right nComp hcolor" id="comp">0</span>
+                        </div>
+                        <div class="row">
+                            <p>Swaps</p>
+                            <span class="right nSwap hcolor" id = "swap">0</span>
+                        </div>
+                        <div class="row">
+                            <p>Iterations</p>
+                            <span class="right nIter hcolor" id = "iter">0</span>
+                        </div>
+                        <div class="row">
+                            <p>Time</p>
+                            <span class="right nTime hcolor" id = "ntime">0</span>
+                        </div>
+                        
+                    </div>
+                    <div class="control-sliders">
+                        <div class="controls">
+                            <div style="display: flex;justify-content: space-between;">
+                            <label for="Array" class="size">Array Size</label><span class="aSize" id="aSize">50</span>
+                            </div>
+                            <input id="arraySize" type="range" min="0" max="100" value="50" />
+                            <div style="display: flex;justify-content: space-between;">
+                            <label for="Speed" class="speed">Speed</label><span class="aSpeed" id="aSpeed">5.0 x</span>
+                            </div>
+                            <input id="animation-speed" type="range" min="0" max="100" value="50" />
+                        </div>
+                    </div>
+                </div>
+                
 
-    <!-- Main title (changes based on selection) -->
-    <h1 class="main-title" id="algoTitle">Insertion Sort</h1>
-
-    <!-- Visualization area -->
-    <div class="visual-wrapper">
-      <div class="visual-box"></div>
+            </section>
+            <section class="complexity-section">
+                <div class="complexity-card">
+                    <h3 class="complexity-title hcolor">Time Complexity</h3>
+                    <div class="complexity-item">
+                    <span class="complexity-case">Best Case</span>
+                    <span class="complexity-value best" id="timeBest">O(n)</span>
+                    </div>
+                    <div class="complexity-item">
+                    <span class="complexity-case">Average Case</span>
+                    <span class="complexity-value avg" id="timeAvg">O(n²)</span>
+                    </div>
+                    <div class="complexity-item">
+                    <span class="complexity-case">Worst Case</span>
+                    <span class="complexity-value worst" id="timeWorst">O(n²)</span>
+                    </div>
+                </div>
+                <div class="complexity-card">
+                    <h3 class="complexity-title hcolor">Space Complexity</h3>
+                    <div class="complexity-item">
+                    <span class="complexity-case">Worst Case</span>
+                    <span class="complexity-value" id="spaceComp">O(1)</span>
+                    </div>
+                    <div class="complexity-item">
+                    <span class="complexity-case">Stable</span>
+                    <span class="complexity-value best" id="stable">Yes</span>
+                    </div>
+                    <div class="complexity-item">
+                    <span class="complexity-case">In-Place</span>
+                    <span class="complexity-value best" id="inPlace">Yes</span>
+                    </div>
+                </div>
+            </section>
+        </header>
     </div>
-
-    <!-- Controls -->
-    <div class="controls">
-      <!-- Array size slider -->
-      <div class="array-size-control">
-        <input id="arraySize" type="range" min="10" max="200" value="50" />
-        <span class="speed-label">Size</span>
-      </div>
-
-      <!-- Speed slider -->
-      <div class="speed-control">
-        <input id="speed" type="range" min="1" max="100" value="1" />
-        <span class="speed-label" id="speed-lbl">1.0x</span>
-      </div>
-
-      <!-- Play / Stop buttons -->
-      <div class="square-btn green" id="start_btn">▶</div>
-      <div class="square-btn red" id="stop_btn">■</div>
-      <div class="square-btn yellow" id="shuffle_btn">🔀</div>
-    </div>
-
-    <!-- Complexity section -->
-    <div class="complexity">
-      <div class="time-complexity">
-        Time Complexity:
-        <span id="timeComp">Best: O(n), Avg: O(n²), Worst: O(n²)</span>
-      </div>
-      <div class="space-complexity">
-        Space Complexity:
-        <span id="spaceComp">O(1)</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- JS -->
-  <script src="Algorithms/insertion.js"></script>
-  <script src="Algorithms/selection.js"></script>
-  <script src="Algorithms/quick.js"></script>
-  <script src="Algorithms/merge.js"></script>
-  <script src="Algorithms/bubble.js"></script>
-  <script src="algorithmdata.js"></script>
-
-  <script src="script.js"></script>
+    <script src="Algorithms/insertion.js"></script>
+    <script src="Algorithms/selection.js"></script>
+    <script src="Algorithms/quick.js"></script>
+    <script src="Algorithms/merge.js"></script>
+    <script src="Algorithms/bubble.js"></script>
+    <script src="Algorithms/heap.js"></script>
+    <script src="algorithmdata.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
